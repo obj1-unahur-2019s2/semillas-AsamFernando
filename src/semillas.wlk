@@ -1,3 +1,5 @@
+import parcelas.*
+
 class Planta {
 	var property anioObtencionSemilla
 	var property altura
@@ -20,7 +22,7 @@ class Planta {
 
 class Menta inherits Planta {
 	//const property horasDeSolTolera =6
-	var property horasDeSolTolera=6
+	const property horasDeSolTolera=6
 	//override method condicionAlternativa() { altura>0.4 }
 	
 	override method daNuevasSemillas() {
@@ -68,7 +70,7 @@ class SojaTrans inherits Soja {
 	override method daNuevasSemillas() { return false }
 	
 	override method parcelaIdeal(parcela) {
-		return parcela.plantasQTiene()==1
+		return parcela.cantMaxPlantas()==1
 	}
 }
 

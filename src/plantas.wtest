@@ -1,5 +1,6 @@
 
 import semillas.*
+import parcelas.*
 
 describe "test plantas" {
 	var menta1=new Menta( anioObtencionSemilla= 2008, altura= 1 )
@@ -8,6 +9,19 @@ describe "test plantas" {
 	var soja2=new Soja( anioObtencionSemilla= 2009, altura= 1.2 )
 	var quinoa1=new Quinoa( horasDeSolTolera=12, anioObtencionSemilla= 2010, altura= 1 )
 	var quinoa2=new Quinoa( horasDeSolTolera=9, anioObtencionSemilla= 2006, altura= 2 )
+	var quinoa3=new Quinoa( horasDeSolTolera=12, anioObtencionSemilla= 2010, altura= 1 )
+	var quinoa4=new Quinoa( horasDeSolTolera=9, anioObtencionSemilla= 2006, altura= 2 )
+	var sojaTrans1=new SojaTrans( anioObtencionSemilla= 2008, altura= 1 )
+	var hBuena1=new HierbaBuena( anioObtencionSemilla= 2005, altura= 0.3 )
+	var sojaTrans2=new SojaTrans( anioObtencionSemilla= 2008, altura= 1 )
+	var hBuena2=new HierbaBuena( anioObtencionSemilla= 2005, altura= 0.3 )
+	var sojaTrans3=new SojaTrans( anioObtencionSemilla= 2008, altura= 1 )
+	var hBuena3=new HierbaBuena( anioObtencionSemilla= 2005, altura= 0.3 )
+	var parcela1=new Ecologica(largo=2, ancho=2.5, horasSol=7)//menta
+	var parcela2=new Ecologica(largo=5, ancho=3, horasSol=8)//quinoa
+	var parcela3=new Industrial(largo=4, ancho=4, horasSol=9)//soja comun
+	var parcela4=new Industrial(largo=5, ancho=4, horasSol=8)//soja trans
+	var parcela5=new Industrial(largo=5, ancho=5, horasSol=6)//soja trans
 	
 	
 	test "menta" {
@@ -27,7 +41,52 @@ describe "test plantas" {
 	}
 	test "quinoa" {
 		assert.that(quinoa1.daNuevasSemillas() )
-
 		assert.notThat(quinoa2.daNuevasSemillas() )	
 	}
+	test "parcela ideal soja comun y trans" {
+		assert.that(soja1.parcelaIdeal(parcela1))
+		assert.notThat(soja2.parcelaIdeal(parcela1))
+		assert.that(sojaTrans1.parcelaIdeal(parcela1))
+		assert.notThat(sojaTrans1.parcelaIdeal(parcela3))
+	}
+	test "parcela ideal menta y hierbaBuena" {
+		assert.that(menta1.parcelaIdeal(parcela3))
+		assert.that(menta1.parcelaIdeal(parcela2))
+		assert.that(hBuena1.parcelaIdeal(parcela3))
+		assert.that(hBuena1.parcelaIdeal(parcela2))
+	}
+	test "inta" {
+		parcela2.plantaPlanta(menta1)
+		parcela2.plantaPlanta(menta2)
+		parcela2.plantaPlanta(soja1)
+		parcela2.plantaPlanta(soja2)
+		parcela2.plantaPlanta(quinoa1)
+		parcela2.plantaPlanta(quinoa2)
+		parcela3.plantaPlanta(quinoa3)
+		parcela3.plantaPlanta(quinoa4)
+		parcela3.plantaPlanta(sojaTrans2)
+		parcela3.plantaPlanta(hBuena2)
+		parcela3.plantaPlanta(sojaTrans3)
+		parcela3.plantaPlanta(hBuena3)
+		
+		assert.equals(3, parcela2.cantBienAsociadas())
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
